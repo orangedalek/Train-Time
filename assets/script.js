@@ -42,7 +42,7 @@ $('#submit-button').on('click', function(event) {
 // -alert user that train has been added
 	alert("Thank you for telling us of this wonderful new choo choo machine!");
 // -clear form
-	$('#trainName').val("");
+	$('#train-name').val("");
 	$('#destination').val("");
 	$('#first-train-time').val("");
 	$('#frequency').val("");
@@ -59,10 +59,33 @@ $('#submit-button').on('click', function(event) {
 
 	// -format the time
 	var currentTime = moment().format("HH:mm");
-	// iterate over times the train will come
-	
+	//variables for calculating next train
 
-	// -calculate the next train arrival
+	//start 1 year ago to make sure we don't miss the train!
+	var trainTimeConverted = moment(firstTrainTime, "HH:mm").subtract(1, "years");
+		console.log(trainTimeConverted);
+
+	//find difference in time between now and the next train		
+	var diffTime = moment().diff(moment(trainTimeConverted), "minutes");
+	console.log("difference", diffTime);
+
 	// -calculate time between now & next train arrival
+
+	var timeToNextTrain = diffTime % frequency;
+	console.log("next", timeToNextTrain);
+
+	var minTilTrain = frequency - timeToNextTrain;
+	console.log("minutes", minTilTrain)
+	// -calculate the next train arrival
+	var nextTrain = moment().add(minTilTrain, "minutes");
+	console.log("min tin next", nextTrain);
+
 	// -append data to train table
-	})
+	$('#train-table').append('<tr><td>' + trainName + '</td><td>' + destination + '</td><td>' + frequency + '</td><td>' + moment(nextTrain).format('HH:mm') + '</td><td>' + minTilTrain + '</td></tr>');
+
+	});
+
+
+
+
+
