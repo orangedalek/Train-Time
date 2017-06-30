@@ -1,4 +1,20 @@
+
+
+
 #train-box{
 	background-image: url("train.jpg");
 	color: white;
+}
+
+.container{
+	background-color: darkgrey;
+	width: 100%;
+}
+
+
+.panel > .panel-heading {
+    background-image: none;
+    background-color: black;
+    color: white;
+
 }
